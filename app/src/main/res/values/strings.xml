@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">Control De Ganado</string>
+
+    <!--MENU-->
+    <!--Animales-->
+    <string name="animals">Animales</string>
+    <string name="addAnimal">Registrar Animal</string>
+    <string name="listAnimals">Lista de Animales</string>
+    <!--Vacunas-->
+    <string name="vaccines">Vacunas</string>
+    <string name="applyVaccine">Aplicar Vacuna</string>
+    <string name="appliedVaccines">Vacunas Aplicadas</string>
+    <!--Enfermedades-->
+    <string name="diseases">Enfermedades</string>
+    <string name="addDisease">Registrar Enfermedad</string>
+    <string name="listDiseases">Lista de Enfermedades</string>
+    <!--Gastos-->
+    <string name="expenses">Gastos</string>
+    <string name="addExpenses">Registrar Gasto</string>
+    <string name="listExpenses">Lista de Gastos</string>
+    <!--END MENU-->
+
+    <!--ADD ANIMAL-->
+    <string name="animalType">Tipo de Ganado</string>
+    <string name="name">Nombre</string>
+    <string name="buyPrice">Precio de compra</string>
+    <string name="birthDate">Fecha de nacimiento</string>
+    <string name="birthWeight">Peso al nacer</string>
+    <string name="color">Color</string>
+    <string name="gender">Sexo</string>
+    <string name="weaningDate">Fecha de destete</string>
+    <string name="weaningWeight">Peso al destete</string>
+    <string name="soldDate">Fecha de venta</string>
+    <string name="soldWeight">Peso de venta</string>
+    <string name="soldPrice">Precio de venta</string>
+    <string name="male">Macho</string>
+    <string name="female">Hembra</string>
+    <string name="save">Guardar</string>
+    <!--END ADD ANIMAL-->
 </resources>

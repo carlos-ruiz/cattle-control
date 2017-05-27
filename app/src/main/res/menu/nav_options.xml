@@ -1,26 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_animals"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="Animales" />
-        <item
-            android:id="@+id/menu_vaccines"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="Vacunas" />
-        <item
-            android:id="@+id/menu_diseases"
-            android:icon="@android:drawable/ic_media_play"
-            android:title="Enfermedades" />
+        <item android:title="@string/animals">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menu_animals"
+                        android:icon="@drawable/ic_menu"
+                        android:title="@string/listAnimals" />
+                    <item
+                        android:id="@+id/menu_add_animal"
+                        android:icon="@android:drawable/ic_input_add"
+                        android:title="@string/addAnimal" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="@string/vaccines">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menu_vaccines"
+                        android:icon="@drawable/ic_menu"
+                        android:title="@string/appliedVaccines" />
+                    <item
+                        android:id="@+id/menu_add_vaccine"
+                        android:icon="@android:drawable/ic_input_add"
+                        android:title="@string/applyVaccine" />
+                </group>
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="@string/diseases">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menu_diseases"
+                        android:icon="@drawable/ic_menu"
+                        android:title="@string/listDiseases" />
+                    <item
+                        android:id="@+id/menu_add_disease"
+                        android:icon="@android:drawable/ic_input_add"
+                        android:title="@string/addDisease" />
+                </group>
+            </menu>
+        </item>
     </group>
 
-    <item android:title="Otras opciones">
-        <menu>
-            <item
-                android:id="@+id/menu_gastos"
-                android:icon="@android:drawable/ic_media_play"
-                android:title="Gastos" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item android:title="@string/expenses">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/menu_expenses"
+                        android:icon="@drawable/ic_menu"
+                        android:title="@string/listExpenses" />
+                    <item
+                        android:id="@+id/menu_add_expense"
+                        android:icon="@android:drawable/ic_input_add"
+                        android:title="@string/addExpenses" />
+                </group>
+            </menu>
+        </item>
+    </group>
 </menu>

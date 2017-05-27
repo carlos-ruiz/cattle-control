@@ -25,6 +25,10 @@ public class AnimalType {
     public AnimalType() {
     }
 
+    public AnimalType(String name){
+        this.name = name;
+    }
+
     public Long getAnimalTypeId() {
         return animalTypeId;
     }
@@ -39,5 +43,10 @@ public class AnimalType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
