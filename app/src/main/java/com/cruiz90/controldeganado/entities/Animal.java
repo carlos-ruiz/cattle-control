@@ -107,6 +107,23 @@ public class Animal {
     @Generated(hash = 1330230372)
     private transient boolean father__refreshed;
 
+    public Animal(AnimalType animalType, String name, Float buyPrice, DateTime bithdate,
+                  Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
+                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice) {
+        this.animalType = animalType;
+        this.name = name;
+        this.buyPrice = buyPrice;
+        this.bithdate = bithdate;
+        this.birthWeight = birthWeight;
+        this.color = color;
+        this.isMale = isMale;
+        this.weaningdate = weaningdate;
+        this.weaningWeight = weaningWeight;
+        this.solddate = solddate;
+        this.soldWeight = soldWeight;
+        this.soldPrice = soldPrice;
+    }
+
     public Long getAnimalId() {
         return animalId;
     }
