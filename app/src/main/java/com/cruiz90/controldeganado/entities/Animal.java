@@ -23,8 +23,8 @@ public class Animal {
 
     @Id(autoincrement = true)
     private Long animalId;
-
-    @ToOne
+    private Long animalTypeId;
+    @ToOne(joinProperty = "animalTypeId")
     private AnimalType animalType;
     private String name;
     private Float buyPrice;
@@ -66,21 +66,44 @@ public class Animal {
             targetProperty = "vaccineId"
     )
     private List<Vaccine> vaccines = null;
-
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-
     /** Used for active entity operations. */
     @Generated(hash = 1746493452)
     private transient AnimalDao myDao;
+    @Generated(hash = 93308694)
+    private transient Long animalType__resolvedKey;
+    @Generated(hash = 1708982261)
+    private transient boolean mother__refreshed;
+    @Generated(hash = 1330230372)
+    private transient boolean father__refreshed;
 
-    @Generated(hash = 635499102)
-    public Animal(Long animalId, String name, Float buyPrice, DateTime bithdate,
-            Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
-            Float weaningWeight, DateTime solddate, Float soldWeight,
+    public Animal(AnimalType animalType, String name, Float buyPrice, DateTime bithdate,
+                  Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
+                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice) {
+        this.animalType = animalType;
+        this.animalTypeId = animalType.getAnimalTypeId();
+        this.name = name;
+        this.buyPrice = buyPrice;
+        this.bithdate = bithdate;
+        this.birthWeight = birthWeight;
+        this.color = color;
+        this.isMale = isMale;
+        this.weaningdate = weaningdate;
+        this.weaningWeight = weaningWeight;
+        this.solddate = solddate;
+        this.soldWeight = soldWeight;
+        this.soldPrice = soldPrice;
+    }
+
+    @Generated(hash = 626407521)
+    public Animal(Long animalId, Long animalTypeId, String name, Float buyPrice,
+            DateTime bithdate, Float birthWeight, String color, Boolean isMale,
+            DateTime weaningdate, Float weaningWeight, DateTime solddate, Float soldWeight,
             Float soldPrice) {
         this.animalId = animalId;
+        this.animalTypeId = animalTypeId;
         this.name = name;
         this.buyPrice = buyPrice;
         this.bithdate = bithdate;
@@ -98,38 +121,20 @@ public class Animal {
     public Animal() {
     }
 
-    @Generated(hash = 573062317)
-    private transient boolean animalType__refreshed;
-
-    @Generated(hash = 1708982261)
-    private transient boolean mother__refreshed;
-
-    @Generated(hash = 1330230372)
-    private transient boolean father__refreshed;
-
-    public Animal(AnimalType animalType, String name, Float buyPrice, DateTime bithdate,
-                  Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
-                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice) {
-        this.animalType = animalType;
-        this.name = name;
-        this.buyPrice = buyPrice;
-        this.bithdate = bithdate;
-        this.birthWeight = birthWeight;
-        this.color = color;
-        this.isMale = isMale;
-        this.weaningdate = weaningdate;
-        this.weaningWeight = weaningWeight;
-        this.solddate = solddate;
-        this.soldWeight = soldWeight;
-        this.soldPrice = soldPrice;
-    }
-
     public Long getAnimalId() {
         return animalId;
     }
 
     public void setAnimalId(Long animalId) {
         this.animalId = animalId;
+    }
+
+    public Long getAnimalTypeId() {
+        return animalTypeId;
+    }
+
+    public void setAnimalTypeId(Long animalTypeId) {
+        this.animalTypeId = animalTypeId;
     }
 
     public String getName() {
@@ -229,31 +234,31 @@ public class Animal {
     }
 
     /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1036493918)
+    @Generated(hash = 594573345)
     public AnimalType getAnimalType() {
-        if (animalType != null || !animalType__refreshed) {
+        Long __key = this.animalTypeId;
+        if (animalType__resolvedKey == null || !animalType__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             AnimalTypeDao targetDao = daoSession.getAnimalTypeDao();
-            targetDao.refresh(animalType);
-            animalType__refreshed = true;
+            AnimalType animalTypeNew = targetDao.load(__key);
+            synchronized (this) {
+                animalType = animalTypeNew;
+                animalType__resolvedKey = __key;
+            }
         }
         return animalType;
     }
 
-    /** To-one relationship, returned entity is not refreshed and may carry only the PK property. */
-    @Generated(hash = 687740154)
-    public AnimalType peakAnimalType() {
-        return animalType;
-    }
-
     /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 498491592)
+    @Generated(hash = 1705821842)
     public void setAnimalType(AnimalType animalType) {
         synchronized (this) {
             this.animalType = animalType;
-            animalType__refreshed = true;
+            animalTypeId = animalType == null ? null : animalType.getAnimalTypeId();
+            animalType__resolvedKey = animalTypeId;
         }
     }
 

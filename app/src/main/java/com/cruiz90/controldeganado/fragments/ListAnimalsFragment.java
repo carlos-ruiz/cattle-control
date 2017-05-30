@@ -6,14 +6,22 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.cruiz90.controldeganado.R;
+import com.cruiz90.controldeganado.adapters.AnimalsListAdapter;
+import com.cruiz90.controldeganado.entities.Animal;
+import com.cruiz90.controldeganado.util.DBConnection;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ListAnimalsFragment extends Fragment {
-
+    private ListView listView;
 
     public ListAnimalsFragment() {
         // Required empty public constructor
@@ -23,8 +31,20 @@ public class ListAnimalsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_animals, container, false);
+        View root = inflater.inflate(R.layout.fragment_list_animals, container, false);
+        final List<Animal> animals = DBConnection.getInstance().loadAll(Animal.class);
+
+        listView = (ListView) root.findViewById(R.id.lv_animals);
+        AnimalsListAdapter adapter = new AnimalsListAdapter(getContext(), R.layout.animal_list_item, animals);
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(), animals.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return root;
     }
 
 }

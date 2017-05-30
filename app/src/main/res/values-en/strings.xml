@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Control De Ganado</string>
+    <string name="addAnimal">Add animal</string>
+    <string name="addDisease">Add disease</string>
+    <string name="addExpenses">Add expense</string>
+    <string name="animalType">Animal type</string>
+    <string name="animals">Animals</string>
+    <string name="appliedVaccines">Applied vaccines</string>
+    <string name="applyVaccine">Apply vaccine</string>
+    <string name="birthDate">Birth date</string>
+    <string name="birthWeight">Birth Weight</string>
+    <string name="buyPrice">Buy price</string>
+    <string name="color">Color</string>
+    <string name="diseases">Diseases</string>
+    <string name="expenses">Expenses</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender</string>
+    <string name="listAnimals">Animals list</string>
+    <string name="listDiseases">Diseases list</string>
+    <string name="listExpenses">Expenses list</string>
+    <string name="male">Male</string>
+    <string name="name">Name</string>
+    <string name="save">Save</string>
+    <string name="soldDate">Sell date</string>
+    <string name="soldPrice">Sell price</string>
+    <string name="soldWeight">Sell weight</string>
+    <string name="vaccines">Vaccines</string>
+    <string name="weaningDate">Weaning date</string>
+    <string name="weaningWeight">Weaning weight</string>
+    <string name="errorNullName">Please write animal name</string>
+    <string name="errorNullColor">Please write animal color</string>
+    <string name="msgAnimalSaved">Animal saved successfully</string>
+</resources>

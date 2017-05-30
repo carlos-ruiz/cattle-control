@@ -1,6 +1,7 @@
 package com.cruiz90.controldeganado.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -23,6 +25,8 @@ import com.cruiz90.controldeganado.util.DBConnection;
 
 import org.joda.time.DateTime;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -32,7 +36,7 @@ public class AddAnimalFragment extends Fragment {
 
     private Spinner animalTypes;
     private EditText et_name, et_buyPrice, et_birthDate, et_birthWeight, et_color, et_weaningDate, et_weaningWeight, et_soldDate, et_soldWeight, et_soldPrice;
-    private RadioButton rb_male, rb_female;
+    private RadioButton rb_male;
     private Button b_save;
     private AnimalType selectedType;
 
@@ -77,15 +81,18 @@ public class AddAnimalFragment extends Fragment {
         et_soldPrice = (EditText) root.findViewById(R.id.et_soldPrice);
         et_soldWeight = (EditText) root.findViewById(R.id.et_soldWeight);
         rb_male = (RadioButton) root.findViewById(R.id.rb_male);
-        rb_female = (RadioButton) root.findViewById(R.id.rb_female);
         b_save = (Button) root.findViewById(R.id.b_save);
+
+        et_birthDate.setOnClickListener(showCalendar(et_birthDate, Calendar.getInstance()));
+        et_weaningDate.setOnClickListener(showCalendar(et_weaningDate, Calendar.getInstance()));
+        et_soldDate.setOnClickListener(showCalendar(et_soldDate, Calendar.getInstance()));
 
         b_save.setOnClickListener(save());
 
         return root;
     }
 
-    public View.OnClickListener save(){
+    public View.OnClickListener save() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,35 +103,65 @@ public class AddAnimalFragment extends Fragment {
                 DateTime birthDate, weaningDate, soldDate;
                 Boolean isMale;
 
-                if(et_name.getText().length() < 1){
-                    errors += "Debe escribir el nombre del animal.\n";
+                if (et_name.getText().length() < 1) {
+                    errors += getString(R.string.errorNullName) + ".\n";
                 }
-                if (et_color.getText().length()<3){
-                    errors += "Debe escribir el color del animal.\n";
+                if (et_color.getText().length() < 3) {
+                    errors += getString(R.string.errorNullColor) + ".\n";
                 }
 
                 name = et_name.getText().toString();
                 color = et_color.getText().toString();
-                buyPrice = (et_buyPrice.getText().length()>0)?Float.parseFloat(et_buyPrice.getText().toString()):null;
-                birthWeight = (et_birthWeight.getText().length()>0)?Float.parseFloat(et_birthWeight.getText().toString()):null;
-                weaningWeight = (et_weaningWeight.getText().length()>0)?Float.parseFloat(et_weaningWeight.getText().toString()):null;
-                soldPrice = (et_soldPrice.getText().length()>0)?Float.parseFloat(et_soldPrice.getText().toString()):null;
-                soldWeight = (et_soldWeight.getText().length()>0)?Float.parseFloat(et_soldWeight.getText().toString()):null;
+                buyPrice = (et_buyPrice.getText().length() > 0) ? Float.parseFloat(et_buyPrice.getText().toString()) : null;
+                birthWeight = (et_birthWeight.getText().length() > 0) ? Float.parseFloat(et_birthWeight.getText().toString()) : null;
+                weaningWeight = (et_weaningWeight.getText().length() > 0) ? Float.parseFloat(et_weaningWeight.getText().toString()) : null;
+                soldPrice = (et_soldPrice.getText().length() > 0) ? Float.parseFloat(et_soldPrice.getText().toString()) : null;
+                soldWeight = (et_soldWeight.getText().length() > 0) ? Float.parseFloat(et_soldWeight.getText().toString()) : null;
 
-                birthDate=weaningDate=soldDate=null;
+                birthDate = (et_birthDate.getText().length() > 0) ? new DateTime(et_birthDate.getTag()) : null;
+                weaningDate = (et_weaningDate.getText().length() > 0) ? new DateTime(et_weaningDate.getTag()) : null;
+                soldDate = (et_soldDate.getText().length() > 0) ? new DateTime(et_soldDate.getTag()) : null;
 
                 isMale = rb_male.isChecked();
 
-                if (errors.length()>0){
+                if (errors.length() > 0) {
                     Toast.makeText(getContext(), errors, Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Animal animal = new Animal(selectedType, name, buyPrice, birthDate, birthWeight, color, isMale, weaningDate, weaningWeight, soldDate, soldWeight, soldPrice);
                     DBConnection.getInstance().insert(animal);
-                    Toast.makeText(getContext(), "Animal guardado correctamente!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.msgAnimalSaved), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 }
+            }
+        };
+    }
+
+    private void updateLabelDate(EditText et, Calendar myCalendar) {
+        String myFormat = "dd/MM/yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+        et.setText(sdf.format(myCalendar.getTime()));
+        et.setTag(myCalendar.getTimeInMillis());
+    }
+
+    private DatePickerDialog.OnDateSetListener dateSetListener(final Calendar calendar, final EditText et) {
+        return new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabelDate(et, calendar);
+            }
+        };
+    }
+
+    private View.OnClickListener showCalendar(final EditText et, final Calendar myCalendar) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(getContext(), dateSetListener(myCalendar, et), myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         };
     }

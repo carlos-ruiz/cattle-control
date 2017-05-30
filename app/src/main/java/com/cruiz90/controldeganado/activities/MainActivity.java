@@ -23,8 +23,6 @@ import com.cruiz90.controldeganado.fragments.ListExpensesFragment;
 import com.cruiz90.controldeganado.fragments.ListVaccinesFragment;
 import com.cruiz90.controldeganado.util.DBConnection;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -35,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setToolbar();
-        List<AnimalType> animalTypes = DBConnection.getInstance().loadAll(AnimalType.class);
-        for (AnimalType at : animalTypes){
-            Log.i("Tipo", at.getName());
-        }
         initAnimalTypes();
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

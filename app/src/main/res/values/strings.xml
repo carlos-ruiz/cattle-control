@@ -36,5 +36,8 @@
     <string name="male">Macho</string>
     <string name="female">Hembra</string>
     <string name="save">Guardar</string>
+    <string name="errorNullName">Escriba el nombre del animal</string>
+    <string name="errorNullColor">Escriba el color del animal</string>
+    <string name="msgAnimalSaved">Animal guardado correctamente</string>
     <!--END ADD ANIMAL-->
 </resources>

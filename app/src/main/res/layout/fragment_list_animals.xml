@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.cruiz90.controldeganado.fragments.ListAnimalsFragment">
 
-    <TextView
+    <ListView
+        android:id="@+id/lv_animals"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="36dp"
-        android:gravity="center"
-        android:text="Lista de animales" />
+        android:layout_height="match_parent">
+
+    </ListView>
 
 </FrameLayout>
