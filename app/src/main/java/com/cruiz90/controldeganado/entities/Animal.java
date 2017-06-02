@@ -41,9 +41,11 @@ public class Animal {
     private Float soldWeight;
     private Float soldPrice;
 
-    @ToOne
+    private Long motherId;
+    @ToOne(joinProperty = "motherId")
     private Animal mother;
-    @ToOne
+    private Long fatherId;
+    @ToOne(joinProperty = "fatherId")
     private Animal father;
     @ToMany
     @JoinEntity(
@@ -66,22 +68,26 @@ public class Animal {
             targetProperty = "vaccineId"
     )
     private List<Vaccine> vaccines = null;
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1746493452)
     private transient AnimalDao myDao;
     @Generated(hash = 93308694)
     private transient Long animalType__resolvedKey;
-    @Generated(hash = 1708982261)
-    private transient boolean mother__refreshed;
-    @Generated(hash = 1330230372)
-    private transient boolean father__refreshed;
+    @Generated(hash = 183549719)
+    private transient Long mother__resolvedKey;
+    @Generated(hash = 2100996716)
+    private transient Long father__resolvedKey;
 
     public Animal(AnimalType animalType, String name, Float buyPrice, DateTime bithdate,
                   Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
-                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice) {
+                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice, Animal mother, Animal father) {
         this.animalType = animalType;
         this.animalTypeId = animalType.getAnimalTypeId();
         this.name = name;
@@ -95,13 +101,16 @@ public class Animal {
         this.solddate = solddate;
         this.soldWeight = soldWeight;
         this.soldPrice = soldPrice;
+        this.mother = mother;
+        this.motherId = mother == null ? null : mother.getAnimalId();
+        this.father = father;
+        this.fatherId = father == null ? null : father.getAnimalId();
     }
 
-    @Generated(hash = 626407521)
-    public Animal(Long animalId, Long animalTypeId, String name, Float buyPrice,
-            DateTime bithdate, Float birthWeight, String color, Boolean isMale,
-            DateTime weaningdate, Float weaningWeight, DateTime solddate, Float soldWeight,
-            Float soldPrice) {
+    @Generated(hash = 954697352)
+    public Animal(Long animalId, Long animalTypeId, String name, Float buyPrice, DateTime bithdate, Float birthWeight,
+                  String color, Boolean isMale, DateTime weaningdate, Float weaningWeight, DateTime solddate, Float soldWeight,
+                  Float soldPrice, Long motherId, Long fatherId) {
         this.animalId = animalId;
         this.animalTypeId = animalTypeId;
         this.name = name;
@@ -115,6 +124,8 @@ public class Animal {
         this.solddate = solddate;
         this.soldWeight = soldWeight;
         this.soldPrice = soldPrice;
+        this.motherId = motherId;
+        this.fatherId = fatherId;
     }
 
     @Generated(hash = 308569294)
@@ -233,7 +244,30 @@ public class Animal {
         this.soldPrice = soldPrice;
     }
 
-    /** To-one relationship, resolved on first access. */
+    public Long getMotherId() {
+        return motherId;
+    }
+
+    public void setMotherId(Long motherId) {
+        this.motherId = motherId;
+    }
+
+    public Long getFatherId() {
+        return fatherId;
+    }
+
+    public void setFatherId(Long fatherId) {
+        this.fatherId = fatherId;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    /**
+     * To-one relationship, resolved on first access.
+     */
     @Generated(hash = 594573345)
     public AnimalType getAnimalType() {
         Long __key = this.animalTypeId;
@@ -252,7 +286,9 @@ public class Animal {
         return animalType;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1705821842)
     public void setAnimalType(AnimalType animalType) {
         synchronized (this) {
@@ -262,61 +298,69 @@ public class Animal {
         }
     }
 
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1659181247)
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 691857630)
     public Animal getMother() {
-        if (mother != null || !mother__refreshed) {
+        Long __key = this.motherId;
+        if (mother__resolvedKey == null || !mother__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             AnimalDao targetDao = daoSession.getAnimalDao();
-            targetDao.refresh(mother);
-            mother__refreshed = true;
+            Animal motherNew = targetDao.load(__key);
+            synchronized (this) {
+                mother = motherNew;
+                mother__resolvedKey = __key;
+            }
         }
         return mother;
     }
 
-    /** To-one relationship, returned entity is not refreshed and may carry only the PK property. */
-    @Generated(hash = 1992951022)
-    public Animal peakMother() {
-        return mother;
-    }
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1423114989)
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 282997677)
     public void setMother(Animal mother) {
         synchronized (this) {
             this.mother = mother;
-            mother__refreshed = true;
+            motherId = mother == null ? null : mother.getAnimalId();
+            mother__resolvedKey = motherId;
         }
     }
 
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 609622899)
+    /**
+     * To-one relationship, resolved on first access.
+     */
+    @Generated(hash = 1277689425)
     public Animal getFather() {
-        if (father != null || !father__refreshed) {
+        Long __key = this.fatherId;
+        if (father__resolvedKey == null || !father__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
             }
             AnimalDao targetDao = daoSession.getAnimalDao();
-            targetDao.refresh(father);
-            father__refreshed = true;
+            Animal fatherNew = targetDao.load(__key);
+            synchronized (this) {
+                father = fatherNew;
+                father__resolvedKey = __key;
+            }
         }
         return father;
     }
 
-    /** To-one relationship, returned entity is not refreshed and may carry only the PK property. */
-    @Generated(hash = 1816497986)
-    public Animal peakFather() {
-        return father;
-    }
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 2126704041)
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
+    @Generated(hash = 1223263980)
     public void setFather(Animal father) {
         synchronized (this) {
             this.father = father;
-            father__refreshed = true;
+            fatherId = father == null ? null : father.getAnimalId();
+            father__resolvedKey = fatherId;
         }
     }
 
@@ -342,7 +386,9 @@ public class Animal {
         return relatives;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 794785943)
     public synchronized void resetRelatives() {
         relatives = null;
@@ -370,7 +416,9 @@ public class Animal {
         return diseases;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 456762677)
     public synchronized void resetDiseases() {
         diseases = null;
@@ -398,7 +446,9 @@ public class Animal {
         return vaccines;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 179217238)
     public synchronized void resetVaccines() {
         vaccines = null;
@@ -446,4 +496,5 @@ public class Animal {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getAnimalDao() : null;
     }
+
 }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean fragmentTransaction = false;
                 Fragment fragment = null;
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menu_animals:
                         fragmentTransaction = true;
                         fragment = new ListAnimalsFragment();
@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initAnimalTypes() {
-        if(DBConnection.getInstance().count(AnimalType.class) == 0){
-            String [] animalTypes = {"Ovino", "Bovino", "Caprino", "Equino", "Porcino"};
-            for(String animalType:animalTypes){
+        if (DBConnection.getInstance().count(AnimalType.class) == 0) {
+            String[] animalTypes = {"Ovino", "Bovino", "Caprino", "Equino", "Porcino"};
+            for (String animalType : animalTypes) {
                 AnimalType at = new AnimalType(animalType);
                 DBConnection.getInstance().insert(at);
             }
-        }else{
+        } else {
             Log.i("DB", "AnimalTypes already initialized");
         }
     }

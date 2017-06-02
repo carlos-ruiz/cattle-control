@@ -20,9 +20,11 @@ import android.widget.Toast;
 import com.cruiz90.controldeganado.R;
 import com.cruiz90.controldeganado.activities.MainActivity;
 import com.cruiz90.controldeganado.entities.Animal;
+import com.cruiz90.controldeganado.entities.AnimalDao;
 import com.cruiz90.controldeganado.entities.AnimalType;
 import com.cruiz90.controldeganado.util.DBConnection;
 
+import org.greenrobot.greendao.query.QueryBuilder;
 import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +41,9 @@ public class AddAnimalFragment extends Fragment {
     private RadioButton rb_male;
     private Button b_save;
     private AnimalType selectedType;
+    private Animal selectedMother;
+    private Animal selectedFather;
+    private List<Animal> females, males;
 
     public AddAnimalFragment() {
         // Required empty public constructor
@@ -50,18 +55,78 @@ public class AddAnimalFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_add_animal, container, false);
 
-        selectedType = null;
-
-        Spinner spinner = (Spinner) root.findViewById(R.id.s_animalType);
         //Definiendo los valores a mostrar en el spinner
         List<AnimalType> animalTypes = DBConnection.getInstance().loadAll(AnimalType.class);
-        ArrayAdapter<AnimalType> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, animalTypes);
+        selectedType = animalTypes.get(0);
+
+        //Animal temporal para madre o padre desconocidos
+        final Animal unknown = new Animal();
+        unknown.setName(getString(R.string.unknown));
+
+        females = getPossibleParents(false, selectedType);
+        females.add(0, unknown);
+
+        males = getPossibleParents(true, selectedType);
+        males.add(0, unknown);
+
+        Spinner spinner = (Spinner) root.findViewById(R.id.s_animalType);
+
+        final ArrayAdapter<AnimalType> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, animalTypes);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        //Spinner para obtener la madre
+        Spinner motherSpinner = (Spinner) root.findViewById(R.id.s_mother);
+
+        final ArrayAdapter<Animal> motherAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, females);
+        motherAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        motherSpinner.setAdapter(motherAdapter);
+        motherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedMother = (Animal) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //Spinner para obtener el padre
+        Spinner fatherSpinner = (Spinner) root.findViewById(R.id.s_father);
+
+        final ArrayAdapter<Animal> fatherAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, males);
+        fatherAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        fatherSpinner.setAdapter(fatherAdapter);
+        fatherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedFather = (Animal) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedType = (AnimalType) parent.getItemAtPosition(position);
+                females.clear();
+                females.add(unknown);
+                for (Animal a : getPossibleParents(false, selectedType)) {
+                    females.add(a);
+                }
+                motherAdapter.notifyDataSetChanged();
+                males.clear();
+                males.add(unknown);
+                for (Animal a : getPossibleParents(true, selectedType)) {
+                    males.add(a);
+                }
+                fatherAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -127,7 +192,13 @@ public class AddAnimalFragment extends Fragment {
                 if (errors.length() > 0) {
                     Toast.makeText(getContext(), errors, Toast.LENGTH_SHORT).show();
                 } else {
-                    Animal animal = new Animal(selectedType, name, buyPrice, birthDate, birthWeight, color, isMale, weaningDate, weaningWeight, soldDate, soldWeight, soldPrice);
+                    if (selectedFather.getName().equals(getString(R.string.unknown))) {
+                        selectedFather = null;
+                    }
+                    if (selectedMother.getName().equals(getString(R.string.unknown))) {
+                        selectedMother = null;
+                    }
+                    Animal animal = new Animal(selectedType, name, buyPrice, birthDate, birthWeight, color, isMale, weaningDate, weaningWeight, soldDate, soldWeight, soldPrice, selectedMother, selectedFather);
                     DBConnection.getInstance().insert(animal);
                     Toast.makeText(getContext(), getString(R.string.msgAnimalSaved), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
@@ -164,6 +235,13 @@ public class AddAnimalFragment extends Fragment {
                 new DatePickerDialog(getContext(), dateSetListener(myCalendar, et), myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         };
+    }
+
+    private List<Animal> getPossibleParents(boolean isMale, AnimalType animalType) {
+        QueryBuilder<Animal> queryBuilder = DBConnection.getInstance().queryBuilder(Animal.class);
+        queryBuilder.where(AnimalDao.Properties.IsMale.eq(isMale), AnimalDao.Properties.AnimalTypeId.eq(animalType.getAnimalTypeId()));
+        queryBuilder.orderDesc(AnimalDao.Properties.Bithdate);
+        return queryBuilder.list();
     }
 
 }

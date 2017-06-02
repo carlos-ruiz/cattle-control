@@ -15,6 +15,16 @@
             android:padding="10dp"
             android:orientation="vertical">
 
+            <Switch
+                android:id="@+id/s_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="10dp"
+                android:switchPadding="@dimen/switch_padding"
+                android:text="@string/edit"
+                android:textStyle="bold"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -22,6 +32,26 @@
 
             <Spinner
                 android:id="@+id/s_animalType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mother" />
+
+            <Spinner
+                android:id="@+id/s_mother"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/father" />
+
+            <Spinner
+                android:id="@+id/s_father"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -187,6 +217,15 @@
                 android:background="@color/colorPrimary"
                 android:textColor="#FFF"
                 android:text="@string/save" />
+
+            <Button
+                android:id="@+id/b_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:textColor="#FFF"
+                android:visibility="gone"
+                android:text="@string/save_changes" />
         </LinearLayout>
 
     </FrameLayout>

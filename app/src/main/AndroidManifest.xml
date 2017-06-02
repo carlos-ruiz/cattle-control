@@ -4,7 +4,7 @@
 
     <application
         android:name=".util.App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_sheep"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_sheep_round"

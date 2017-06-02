@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.cruiz90.controldeganado.R;
 import com.cruiz90.controldeganado.adapters.AnimalsListAdapter;
@@ -41,7 +40,8 @@ public class ListAnimalsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), animals.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Fragment fragment = DetailsAnimalFragment.newInstance(animals.get(position).getAnimalId());
+                getFragmentManager().beginTransaction().replace(R.id.content_frame,fragment).commit();
             }
         });
         return root;

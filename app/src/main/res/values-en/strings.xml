@@ -31,4 +31,10 @@
     <string name="errorNullName">Please write animal name</string>
     <string name="errorNullColor">Please write animal color</string>
     <string name="msgAnimalSaved">Animal saved successfully</string>
+    <string name="mother">Mother</string>
+    <string name="father">Father</string>
+    <string name="unknown">Unknown</string>
+    <string name="edit">Edit</string>
+    <string name="save_changes">Save changes</string>
+    <string name="msgChangesSaved">Changes saved successfully</string>
 </resources>
