@@ -1,14 +1,50 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context="com.cruiz90.controldeganado.fragments.AddVaccineFragment">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="36dp"
-        android:gravity="center"
-        android:text="Registrar vacuna" />
+        android:layout_height="wrap_content"
+        android:text="@string/name" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dosesPerKg" />
+
+    <EditText
+        android:id="@+id/et_dosePerKg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
+
+    <Switch
+        android:id="@+id/s_isPregnantAllowed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:showText="true"
+        android:switchPadding="@dimen/switch_padding"
+        android:text="@string/isPregnantAllowed"
+        android:textOff="@string/no"
+        android:textOn="@string/yes" />
+
+    <Button
+        android:id="@+id/b_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/save"
+        android:textColor="#FFF" />
+
+</LinearLayout>

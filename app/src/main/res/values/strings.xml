@@ -38,7 +38,7 @@
     <string name="save">Guardar</string>
     <string name="errorNullName">Escriba el nombre del animal</string>
     <string name="errorNullColor">Escriba el color del animal</string>
-    <string name="msgAnimalSaved">Animal guardado correctamente</string>
+    <string name="msgSaved">Registro guardado correctamente</string>
     <string name="mother">Madre</string>
     <string name="father">Padre</string>
     <string name="unknown">Desconocido</string>
@@ -46,5 +46,13 @@
     <string name="edit">Editar</string>
     <string name="save_changes">Guardar cambios</string>
     <string name="msgChangesSaved">Cambios guardados correctamente</string>
+    <string name="dosesPerKg">Dosis por kilogramo</string>
+    <string name="isPregnantAllowed">Permitido en embarazadas</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="errorDoseVaccineNull">Escriba la dosis por kilogramo</string>
+    <string name="errorNameVaccineNull">Escriba el nombre de la vacuna</string>
+    <string name="addVaccine">Registrar Vacuna</string>
+    <string name="listVaccines">Lista de Vacunas</string>
     <!--END ADD ANIMAL-->
 </resources>

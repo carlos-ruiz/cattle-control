@@ -200,7 +200,7 @@ public class AddAnimalFragment extends Fragment {
                     }
                     Animal animal = new Animal(selectedType, name, buyPrice, birthDate, birthWeight, color, isMale, weaningDate, weaningWeight, soldDate, soldWeight, soldPrice, selectedMother, selectedFather);
                     DBConnection.getInstance().insert(animal);
-                    Toast.makeText(getContext(), getString(R.string.msgAnimalSaved), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.msgSaved), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

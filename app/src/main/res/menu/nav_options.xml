@@ -23,9 +23,17 @@
                     <item
                         android:id="@+id/menu_vaccines"
                         android:icon="@drawable/ic_menu"
-                        android:title="@string/appliedVaccines" />
+                        android:title="@string/listVaccines" />
                     <item
                         android:id="@+id/menu_add_vaccine"
+                        android:icon="@android:drawable/ic_input_add"
+                        android:title="@string/addVaccine" />
+                    <item
+                        android:id="@+id/applied_vaccines"
+                        android:icon="@drawable/ic_menu"
+                        android:title="@string/appliedVaccines" />
+                    <item
+                        android:id="@+id/menu_apply_vaccine"
                         android:icon="@android:drawable/ic_input_add"
                         android:title="@string/applyVaccine" />
                 </group>

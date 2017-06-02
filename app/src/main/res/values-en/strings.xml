@@ -30,11 +30,19 @@
     <string name="weaningWeight">Weaning weight</string>
     <string name="errorNullName">Please write animal name</string>
     <string name="errorNullColor">Please write animal color</string>
-    <string name="msgAnimalSaved">Animal saved successfully</string>
+    <string name="msgSaved">Animal saved successfully</string>
     <string name="mother">Mother</string>
     <string name="father">Father</string>
     <string name="unknown">Unknown</string>
     <string name="edit">Edit</string>
     <string name="save_changes">Save changes</string>
     <string name="msgChangesSaved">Changes saved successfully</string>
+    <string name="dosesPerKg">Doses per kg</string>
+    <string name="isPregnantAllowed">Allowed when pregnant</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="errorDoseVaccineNull">Please write vaccine dose per kg</string>
+    <string name="errorNameVaccineNull">Please write vaccine name</string>
+    <string name="listVaccines">Vaccines list</string>
+    <string name="addVaccine">Add vaccine</string>
 </resources>

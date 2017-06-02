@@ -30,6 +30,12 @@ public class Vaccine {
     public Vaccine() {
     }
 
+    public Vaccine(String name, Float dosePerKg, Boolean isPregnantAllowed) {
+        this.name = name;
+        this.dosePerKg = dosePerKg;
+        this.isPregnantAllowed = isPregnantAllowed;
+    }
+
     public Long getVaccineId() {
         return vaccineId;
     }
