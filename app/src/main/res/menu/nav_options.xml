@@ -15,8 +15,6 @@
                 </group>
             </menu>
         </item>
-    </group>
-    <group android:checkableBehavior="single">
         <item android:title="@string/vaccines">
             <menu>
                 <group android:checkableBehavior="single">
@@ -29,7 +27,7 @@
                         android:icon="@android:drawable/ic_input_add"
                         android:title="@string/addVaccine" />
                     <item
-                        android:id="@+id/applied_vaccines"
+                        android:id="@+id/menu_applied_vaccines"
                         android:icon="@drawable/ic_menu"
                         android:title="@string/appliedVaccines" />
                     <item
@@ -39,8 +37,6 @@
                 </group>
             </menu>
         </item>
-    </group>
-    <group android:checkableBehavior="single">
         <item android:title="@string/diseases">
             <menu>
                 <group android:checkableBehavior="single">
@@ -55,9 +51,6 @@
                 </group>
             </menu>
         </item>
-    </group>
-
-    <group android:checkableBehavior="single">
         <item android:title="@string/expenses">
             <menu>
                 <group android:checkableBehavior="single">

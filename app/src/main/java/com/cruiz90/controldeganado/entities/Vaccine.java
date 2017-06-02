@@ -75,4 +75,9 @@ public class Vaccine {
     public void setIsPregnantAllowed(Boolean isPregnantAllowed) {
         this.isPregnantAllowed = isPregnantAllowed;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

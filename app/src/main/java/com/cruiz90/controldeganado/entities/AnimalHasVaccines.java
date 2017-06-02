@@ -26,6 +26,12 @@ public class AnimalHasVaccines {
         this.vaccineId = vaccineId;
     }
 
+    public AnimalHasVaccines(Long animalId, Long vaccineId, DateTime vaccineDate) {
+        this.animalId = animalId;
+        this.vaccineId = vaccineId;
+        this.vaccineDate = vaccineDate;
+    }
+
     @Generated(hash = 1178743875)
     public AnimalHasVaccines(Long id, Long animalId, Long vaccineId,
             DateTime vaccineDate) {

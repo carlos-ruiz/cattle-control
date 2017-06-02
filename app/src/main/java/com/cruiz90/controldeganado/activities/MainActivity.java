@@ -17,6 +17,8 @@ import com.cruiz90.controldeganado.fragments.AddAnimalFragment;
 import com.cruiz90.controldeganado.fragments.AddDiseaseFragment;
 import com.cruiz90.controldeganado.fragments.AddExpenseFragment;
 import com.cruiz90.controldeganado.fragments.AddVaccineFragment;
+import com.cruiz90.controldeganado.fragments.AppliedVaccinesFragment;
+import com.cruiz90.controldeganado.fragments.ApplyVaccineFragment;
 import com.cruiz90.controldeganado.fragments.ListAnimalsFragment;
 import com.cruiz90.controldeganado.fragments.ListDiseasesFragment;
 import com.cruiz90.controldeganado.fragments.ListExpensesFragment;
@@ -63,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction = true;
                         fragment = new AddVaccineFragment();
                         break;
+                    case R.id.menu_apply_vaccine:
+                        fragmentTransaction = true;
+                        fragment = new ApplyVaccineFragment();
+                        break;
+                    case R.id.menu_applied_vaccines:
+                        fragmentTransaction = true;
+                        fragment = new AppliedVaccinesFragment();
+                        break;
                     case R.id.menu_diseases:
                         fragmentTransaction = true;
                         fragment = new ListDiseasesFragment();
@@ -102,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     private void setDefaultFragment() {
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ListAnimalsFragment()).commit();
         MenuItem item = navigationView.getMenu().findItem(R.id.menu_animals);
-        item.setChecked(true);
+//        item.setChecked(true);
         getSupportActionBar().setTitle(item.getTitle());
     }
 
