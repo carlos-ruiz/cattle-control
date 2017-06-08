@@ -5,7 +5,8 @@ import com.cruiz90.controldeganado.converters.DateTimeConverter;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
-import org.joda.time.DateTime;
+
+import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -19,16 +20,16 @@ public class AnimalHasDiseases {
     private Long animalId;
     private Long diseaseId;
     @Convert(converter = DateTimeConverter.class, columnType = Long.class)
-    private DateTime diseaseDate;
+    private Date diseaseDate;
 
     public AnimalHasDiseases(Long animalId, Long diseaseId) {
         this.animalId = animalId;
         this.diseaseId = diseaseId;
     }
 
-    @Generated(hash = 1901730562)
+    @Generated(hash = 1739131605)
     public AnimalHasDiseases(Long id, Long animalId, Long diseaseId,
-            DateTime diseaseDate) {
+            Date diseaseDate) {
         this.id = id;
         this.animalId = animalId;
         this.diseaseId = diseaseId;
@@ -58,11 +59,11 @@ public class AnimalHasDiseases {
         this.diseaseId = diseaseId;
     }
 
-    public DateTime getDiseaseDate() {
+    public Date getDiseaseDate() {
         return diseaseDate;
     }
 
-    public void setDiseaseDate(DateTime diseaseDate) {
+    public void setDiseaseDate(Date diseaseDate) {
         this.diseaseDate = diseaseDate;
     }
 }

@@ -62,7 +62,7 @@ public class AnimalsListAdapter extends BaseAdapter {
         if (animal.getBithdate() != null) {
             String format = "dd/MM/yyyy";
             SimpleDateFormat sdf = new SimpleDateFormat(format);
-            birthDate.setText(sdf.format(animal.getBithdate().toDate()));
+            birthDate.setText(sdf.format(animal.getBithdate()));
         }
         return v;
     }

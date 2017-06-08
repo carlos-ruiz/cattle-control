@@ -12,8 +12,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
             <Switch
                 android:id="@+id/s_edit"
@@ -23,7 +23,8 @@
                 android:padding="10dp"
                 android:switchPadding="@dimen/switch_padding"
                 android:text="@string/edit"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -88,8 +89,8 @@
                 android:id="@+id/et_birthDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
                 android:ems="10"
+                android:focusable="false"
                 android:inputType="date" />
 
             <TextView
@@ -215,17 +216,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
-                android:textColor="#FFF"
-                android:text="@string/save" />
+                android:text="@string/save"
+                android:textColor="#FFF" />
 
             <Button
                 android:id="@+id/b_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
+                android:text="@string/save_changes"
                 android:textColor="#FFF"
-                android:visibility="gone"
-                android:text="@string/save_changes" />
+                android:visibility="gone" />
         </LinearLayout>
 
     </FrameLayout>

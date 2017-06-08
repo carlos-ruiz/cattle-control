@@ -55,7 +55,11 @@
     <string name="addVaccine">Registrar Vacuna</string>
     <string name="listVaccines">Lista de Vacunas</string>
 
+    <string name="applicationDate">Fecha de aplicación</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vaccine">Vacuna</string>
+    <string name="vaccinatedAnimals">Animales vacunados</string>
     <!--END ADD ANIMAL-->
 </resources>

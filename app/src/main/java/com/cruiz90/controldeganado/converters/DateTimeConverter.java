@@ -1,20 +1,21 @@
 package com.cruiz90.controldeganado.converters;
 
 import org.greenrobot.greendao.converter.PropertyConverter;
-import org.joda.time.DateTime;
+
+import java.util.Date;
 
 /**
  * Created by Carlos on 28/01/2017.
  */
 
-public class DateTimeConverter implements PropertyConverter<DateTime, Long> {
+public class DateTimeConverter implements PropertyConverter<Date, Long> {
     @Override
-    public DateTime convertToEntityProperty(Long databaseValue) {
-        return databaseValue==null ? null : new DateTime(databaseValue);
+    public Date convertToEntityProperty(Long databaseValue) {
+        return databaseValue == null ? null : new Date(databaseValue);
     }
 
     @Override
-    public Long convertToDatabaseValue(DateTime entityProperty) {
-        return  entityProperty==null?null:entityProperty.getMillis();
+    public Long convertToDatabaseValue(Date entityProperty) {
+        return entityProperty == null ? null : entityProperty.getTime();
     }
 }

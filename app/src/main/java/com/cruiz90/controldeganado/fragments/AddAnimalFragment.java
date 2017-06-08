@@ -25,10 +25,10 @@ import com.cruiz90.controldeganado.entities.AnimalType;
 import com.cruiz90.controldeganado.util.DBConnection;
 
 import org.greenrobot.greendao.query.QueryBuilder;
-import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -165,7 +165,7 @@ public class AddAnimalFragment extends Fragment {
 
                 String name, color;
                 Float buyPrice, birthWeight, weaningWeight, soldPrice, soldWeight;
-                DateTime birthDate, weaningDate, soldDate;
+                Date birthDate, weaningDate, soldDate;
                 Boolean isMale;
 
                 if (et_name.getText().length() < 1) {
@@ -183,9 +183,9 @@ public class AddAnimalFragment extends Fragment {
                 soldPrice = (et_soldPrice.getText().length() > 0) ? Float.parseFloat(et_soldPrice.getText().toString()) : null;
                 soldWeight = (et_soldWeight.getText().length() > 0) ? Float.parseFloat(et_soldWeight.getText().toString()) : null;
 
-                birthDate = (et_birthDate.getText().length() > 0) ? new DateTime(et_birthDate.getTag()) : null;
-                weaningDate = (et_weaningDate.getText().length() > 0) ? new DateTime(et_weaningDate.getTag()) : null;
-                soldDate = (et_soldDate.getText().length() > 0) ? new DateTime(et_soldDate.getTag()) : null;
+                birthDate = (et_birthDate.getText().length() > 0) ? new Date((Long) et_birthDate.getTag()) : null;
+                weaningDate = (et_weaningDate.getText().length() > 0) ? new Date((Long) et_weaningDate.getTag()) : null;
+                soldDate = (et_soldDate.getText().length() > 0) ? new Date((Long) et_soldDate.getTag()) : null;
 
                 isMale = rb_male.isChecked();
 

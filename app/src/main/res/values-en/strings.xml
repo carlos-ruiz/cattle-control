@@ -45,4 +45,7 @@
     <string name="errorNameVaccineNull">Please write vaccine name</string>
     <string name="listVaccines">Vaccines list</string>
     <string name="addVaccine">Add vaccine</string>
+    <string name="applicationDate">Application date</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="vaccinatedAnimals">Vaccinated animals</string>
 </resources>

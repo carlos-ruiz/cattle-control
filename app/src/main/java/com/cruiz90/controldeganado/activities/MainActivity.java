@@ -116,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(item.getTitle());
     }
 
+    public void updateActionBarTitle(String title){
+        getSupportActionBar().setTitle(title);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

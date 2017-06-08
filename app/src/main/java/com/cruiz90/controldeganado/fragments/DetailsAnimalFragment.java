@@ -28,10 +28,10 @@ import com.cruiz90.controldeganado.entities.AnimalType;
 import com.cruiz90.controldeganado.util.DBConnection;
 
 import org.greenrobot.greendao.query.QueryBuilder;
-import org.joda.time.DateTime;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -96,6 +96,7 @@ public class DetailsAnimalFragment extends Fragment {
         b_save = (Button) root.findViewById(R.id.b_save);
         b_edit = (Button) root.findViewById(R.id.b_edit);
         s_edit = (Switch) root.findViewById(R.id.s_edit);
+        s_edit.setVisibility(View.VISIBLE);
 
         setFieldsEditable(false);
 
@@ -114,12 +115,12 @@ public class DetailsAnimalFragment extends Fragment {
 
         et_name.setText(animal.getName());
         et_buyPrice.setText(animal.getBuyPrice() == null ? "" : animal.getBuyPrice().toString());
-        et_birthDate.setText(animal.getBithdate() == null ? "" : sdf.format(animal.getBithdate().toDate()));
+        et_birthDate.setText(animal.getBithdate() == null ? "" : sdf.format(animal.getBithdate()));
         et_birthWeight.setText(animal.getBirthWeight() == null ? "" : animal.getBirthWeight().toString());
         et_color.setText(animal.getColor());
-        et_weaningDate.setText(animal.getWeaningdate() == null ? "" : sdf.format(animal.getWeaningdate().toDate()));
+        et_weaningDate.setText(animal.getWeaningdate() == null ? "" : sdf.format(animal.getWeaningdate()));
         et_weaningWeight.setText(animal.getWeaningWeight() == null ? "" : animal.getWeaningWeight().toString());
-        et_soldDate.setText(animal.getSolddate() == null ? "" : sdf.format(animal.getSolddate().toDate()));
+        et_soldDate.setText(animal.getSolddate() == null ? "" : sdf.format(animal.getSolddate()));
         et_soldWeight.setText(animal.getSoldWeight() == null ? "" : animal.getSoldWeight().toString());
         et_soldPrice.setText(animal.getSoldPrice() == null ? "" : animal.getSoldPrice().toString());
 
@@ -305,7 +306,7 @@ public class DetailsAnimalFragment extends Fragment {
 
                 String name, color;
                 Float buyPrice, birthWeight, weaningWeight, soldPrice, soldWeight;
-                DateTime birthDate, weaningDate, soldDate;
+                Date birthDate, weaningDate, soldDate;
                 Boolean isMale;
 
                 if (et_name.getText().length() < 1) {
@@ -323,9 +324,9 @@ public class DetailsAnimalFragment extends Fragment {
                 soldPrice = (et_soldPrice.getText().length() > 0) ? Float.parseFloat(et_soldPrice.getText().toString()) : null;
                 soldWeight = (et_soldWeight.getText().length() > 0) ? Float.parseFloat(et_soldWeight.getText().toString()) : null;
 
-                birthDate = (et_birthDate.getText().length() > 0) ? new DateTime(et_birthDate.getTag()) : null;
-                weaningDate = (et_weaningDate.getText().length() > 0) ? new DateTime(et_weaningDate.getTag()) : null;
-                soldDate = (et_soldDate.getText().length() > 0) ? new DateTime(et_soldDate.getTag()) : null;
+                birthDate = (et_birthDate.getText().length() > 0) ? new Date((Long) et_birthDate.getTag()) : null;
+                weaningDate = (et_weaningDate.getText().length() > 0) ? new Date((Long) et_weaningDate.getTag()) : null;
+                soldDate = (et_soldDate.getText().length() > 0) ? new Date((Long) et_soldDate.getTag()) : null;
 
                 isMale = rb_male.isChecked();
 
@@ -342,9 +343,9 @@ public class DetailsAnimalFragment extends Fragment {
                     animal.setAnimalType(selectedType);
                     animal.setAnimalTypeId(selectedType.getAnimalTypeId());
                     animal.setMother(selectedMother);
-                    animal.setMotherId(selectedMother==null?null:selectedMother.getAnimalId());
+                    animal.setMotherId(selectedMother == null ? null : selectedMother.getAnimalId());
                     animal.setFather(selectedFather);
-                    animal.setFatherId(selectedFather==null?null:selectedFather.getAnimalId());
+                    animal.setFatherId(selectedFather == null ? null : selectedFather.getAnimalId());
                     animal.setBuyPrice(buyPrice);
                     animal.setBithdate(birthDate);
                     animal.setBirthWeight(birthWeight);

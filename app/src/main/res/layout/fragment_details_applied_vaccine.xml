@@ -4,47 +4,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context="com.cruiz90.controldeganado.fragments.ApplyVaccineFragment">
+    tools:context="com.cruiz90.controldeganado.fragments.DetailsAppliedVaccineFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vaccines" />
+        android:text="@string/vaccine" />
 
-    <Spinner
-        android:id="@+id/s_vaccine"
+    <TextView
+        android:id="@+id/tv_vaccine"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="@string/applicationDate" />
 
-    <EditText
-        android:id="@+id/et_date"
+    <TextView
+        android:id="@+id/tv_applicationDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:focusable="false" />
+        android:textSize="18dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/animals" />
+        android:layout_marginTop="15dp"
+        android:text="@string/vaccinatedAnimals" />
 
     <ListView
-        android:id="@+id/lv_vaccines"
+        android:id="@+id/lv_vaccinatedAnimals"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:choiceMode="multipleChoice" />
-
-    <Button
-        android:id="@+id/b_save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:text="@string/save" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

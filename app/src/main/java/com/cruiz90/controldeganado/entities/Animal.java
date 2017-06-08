@@ -2,17 +2,17 @@ package com.cruiz90.controldeganado.entities;
 
 import com.cruiz90.controldeganado.converters.DateTimeConverter;
 
-import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.JoinEntity;
 import org.greenrobot.greendao.annotation.ToMany;
 import org.greenrobot.greendao.annotation.ToOne;
-import org.joda.time.DateTime;
 
+import java.util.Date;
 import java.util.List;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.DaoException;
 
 /**
  * Created by Carlos on 15/05/2017.
@@ -29,15 +29,15 @@ public class Animal {
     private String name;
     private Float buyPrice;
     @Convert(converter = DateTimeConverter.class, columnType = Long.class)
-    private DateTime bithdate;
+    private Date bithdate;
     private Float birthWeight;
     private String color;
     private Boolean isMale;
     @Convert(converter = DateTimeConverter.class, columnType = Long.class)
-    private DateTime weaningdate;
+    private Date weaningdate;
     private Float weaningWeight;
     @Convert(converter = DateTimeConverter.class, columnType = Long.class)
-    private DateTime solddate;
+    private Date solddate;
     private Float soldWeight;
     private Float soldPrice;
 
@@ -68,14 +68,10 @@ public class Animal {
             targetProperty = "vaccineId"
     )
     private List<Vaccine> vaccines = null;
-    /**
-     * Used to resolve relations
-     */
+    /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-    /**
-     * Used for active entity operations.
-     */
+    /** Used for active entity operations. */
     @Generated(hash = 1746493452)
     private transient AnimalDao myDao;
     @Generated(hash = 93308694)
@@ -85,9 +81,9 @@ public class Animal {
     @Generated(hash = 2100996716)
     private transient Long father__resolvedKey;
 
-    public Animal(AnimalType animalType, String name, Float buyPrice, DateTime bithdate,
-                  Float birthWeight, String color, Boolean isMale, DateTime weaningdate,
-                  Float weaningWeight, DateTime solddate, Float soldWeight, Float soldPrice, Animal mother, Animal father) {
+    public Animal(AnimalType animalType, String name, Float buyPrice, Date bithdate,
+                  Float birthWeight, String color, Boolean isMale, Date weaningdate,
+                  Float weaningWeight, Date solddate, Float soldWeight, Float soldPrice, Animal mother, Animal father) {
         this.animalType = animalType;
         this.animalTypeId = animalType.getAnimalTypeId();
         this.name = name;
@@ -107,10 +103,10 @@ public class Animal {
         this.fatherId = father == null ? null : father.getAnimalId();
     }
 
-    @Generated(hash = 954697352)
-    public Animal(Long animalId, Long animalTypeId, String name, Float buyPrice, DateTime bithdate, Float birthWeight,
-                  String color, Boolean isMale, DateTime weaningdate, Float weaningWeight, DateTime solddate, Float soldWeight,
-                  Float soldPrice, Long motherId, Long fatherId) {
+    @Generated(hash = 1262491980)
+    public Animal(Long animalId, Long animalTypeId, String name, Float buyPrice, Date bithdate, Float birthWeight,
+            String color, Boolean isMale, Date weaningdate, Float weaningWeight, Date solddate, Float soldWeight,
+            Float soldPrice, Long motherId, Long fatherId) {
         this.animalId = animalId;
         this.animalTypeId = animalTypeId;
         this.name = name;
@@ -156,11 +152,11 @@ public class Animal {
         this.name = name;
     }
 
-    public DateTime getBithdate() {
+    public Date getBithdate() {
         return bithdate;
     }
 
-    public void setBithdate(DateTime bithdate) {
+    public void setBithdate(Date bithdate) {
         this.bithdate = bithdate;
     }
 
@@ -196,11 +192,11 @@ public class Animal {
         this.isMale = isMale;
     }
 
-    public DateTime getWeaningdate() {
+    public Date getWeaningdate() {
         return weaningdate;
     }
 
-    public void setWeaningdate(DateTime weaningdate) {
+    public void setWeaningdate(Date weaningdate) {
         this.weaningdate = weaningdate;
     }
 
@@ -212,11 +208,11 @@ public class Animal {
         this.weaningWeight = weaningWeight;
     }
 
-    public DateTime getSolddate() {
+    public Date getSolddate() {
         return solddate;
     }
 
-    public void setSolddate(DateTime solddate) {
+    public void setSolddate(Date solddate) {
         this.solddate = solddate;
     }
 
@@ -265,9 +261,7 @@ public class Animal {
         return name;
     }
 
-    /**
-     * To-one relationship, resolved on first access.
-     */
+    /** To-one relationship, resolved on first access. */
     @Generated(hash = 594573345)
     public AnimalType getAnimalType() {
         Long __key = this.animalTypeId;
@@ -286,9 +280,7 @@ public class Animal {
         return animalType;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1705821842)
     public void setAnimalType(AnimalType animalType) {
         synchronized (this) {
@@ -298,9 +290,7 @@ public class Animal {
         }
     }
 
-    /**
-     * To-one relationship, resolved on first access.
-     */
+    /** To-one relationship, resolved on first access. */
     @Generated(hash = 691857630)
     public Animal getMother() {
         Long __key = this.motherId;
@@ -319,9 +309,7 @@ public class Animal {
         return mother;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 282997677)
     public void setMother(Animal mother) {
         synchronized (this) {
@@ -331,9 +319,7 @@ public class Animal {
         }
     }
 
-    /**
-     * To-one relationship, resolved on first access.
-     */
+    /** To-one relationship, resolved on first access. */
     @Generated(hash = 1277689425)
     public Animal getFather() {
         Long __key = this.fatherId;
@@ -352,9 +338,7 @@ public class Animal {
         return father;
     }
 
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
+    /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1223263980)
     public void setFather(Animal father) {
         synchronized (this) {
@@ -386,9 +370,7 @@ public class Animal {
         return relatives;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 794785943)
     public synchronized void resetRelatives() {
         relatives = null;
@@ -416,9 +398,7 @@ public class Animal {
         return diseases;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 456762677)
     public synchronized void resetDiseases() {
         diseases = null;
@@ -446,9 +426,7 @@ public class Animal {
         return vaccines;
     }
 
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
+    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
     @Generated(hash = 179217238)
     public synchronized void resetVaccines() {
         vaccines = null;
@@ -496,5 +474,4 @@ public class Animal {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getAnimalDao() : null;
     }
-
 }
