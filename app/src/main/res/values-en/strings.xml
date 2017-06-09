@@ -52,4 +52,5 @@
     <string name="isRepeat">Is it periodic?</string>
     <string name="selectAtLeastOneAnimal">Select at least an animal</string>
     <string name="avatarDescription">Animal type avatar</string>
+    <string name="vaccinationHistory">Vaccination history</string>
 </resources>

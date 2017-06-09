@@ -65,5 +65,6 @@
     <string name="isRepeat">Es periodica</string>
     <string name="selectAtLeastOneAnimal">Debe seleccionar al menos un animal</string>
     <string name="avatarDescription">Avatar del tipo de animal</string>
+    <string name="vaccinationHistory">Historial de vacunación</string>
     <!--END ADD ANIMAL-->
 </resources>

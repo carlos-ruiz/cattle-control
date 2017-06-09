@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -22,8 +25,11 @@ import android.widget.Toast;
 
 import com.cruiz90.controldeganado.R;
 import com.cruiz90.controldeganado.activities.MainActivity;
+import com.cruiz90.controldeganado.adapters.VaccinationHistoryAdapter;
 import com.cruiz90.controldeganado.entities.Animal;
 import com.cruiz90.controldeganado.entities.AnimalDao;
+import com.cruiz90.controldeganado.entities.AnimalHasVaccines;
+import com.cruiz90.controldeganado.entities.AnimalHasVaccinesDao;
 import com.cruiz90.controldeganado.entities.AnimalType;
 import com.cruiz90.controldeganado.util.DBConnection;
 
@@ -49,6 +55,9 @@ public class DetailsAnimalFragment extends Fragment {
     private Button b_save, b_edit;
     private Switch s_edit;
     private List<Animal> males, females;
+    private LinearLayout ll_vaccinationHistory;
+    private ListView lv_vaccinationHistory;
+    private List<AnimalHasVaccines> appliedVaccines;
 
     public DetailsAnimalFragment() {
         // Required empty public constructor
@@ -75,7 +84,7 @@ public class DetailsAnimalFragment extends Fragment {
         }
         animal = DBConnection.getInstance().load(Animal.class, animalId);
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_add_animal, container, false);
+        View root = inflater.inflate(R.layout.fragment_details_animal, container, false);
 
         //inicializando edit texts
         s_animalType = (Spinner) root.findViewById(R.id.s_animalType);
@@ -97,6 +106,8 @@ public class DetailsAnimalFragment extends Fragment {
         b_edit = (Button) root.findViewById(R.id.b_edit);
         s_edit = (Switch) root.findViewById(R.id.s_edit);
         s_edit.setVisibility(View.VISIBLE);
+        ll_vaccinationHistory = (LinearLayout) root.findViewById(R.id.ll_vaccinationHistory);
+        lv_vaccinationHistory = (ListView) root.findViewById(R.id.lv_vaccinationHistory);
 
         setFieldsEditable(false);
 
@@ -127,12 +138,11 @@ public class DetailsAnimalFragment extends Fragment {
         rb_female.setChecked(!animal.getIsMale());
         rb_male.setChecked(animal.getIsMale());
 
-        Spinner spinner = (Spinner) root.findViewById(R.id.s_animalType);
         //Definiendo los valores a mostrar en el spinner
         List<AnimalType> animalTypes = DBConnection.getInstance().loadAll(AnimalType.class);
         ArrayAdapter<AnimalType> adapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, animalTypes);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        s_animalType.setAdapter(adapter);
 
         //Animal temporal para madre o padre desconocidos
         final Animal unknown = new Animal();
@@ -144,14 +154,10 @@ public class DetailsAnimalFragment extends Fragment {
         males = getPossibleParents(true, selectedType);
         males.add(0, unknown);
 
-        //Spinner para obtener la madre
-        Spinner motherSpinner = (Spinner) root.findViewById(R.id.s_mother);
-        //Definiendo los valores a mostrar en el spinner
-
         final ArrayAdapter<Animal> motherAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, females);
         motherAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        motherSpinner.setAdapter(motherAdapter);
-        motherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        s_mother.setAdapter(motherAdapter);
+        s_mother.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedMother = (Animal) parent.getItemAtPosition(position);
@@ -163,13 +169,11 @@ public class DetailsAnimalFragment extends Fragment {
             }
         });
 
-        //Spinner para obtener el padre
-        Spinner fatherSpinner = (Spinner) root.findViewById(R.id.s_father);
 
         final ArrayAdapter<Animal> fatherAdapter = new ArrayAdapter<>(getActivity(), R.layout.support_simple_spinner_dropdown_item, males);
         fatherAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        fatherSpinner.setAdapter(fatherAdapter);
-        fatherSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        s_father.setAdapter(fatherAdapter);
+        s_father.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedFather = (Animal) parent.getItemAtPosition(position);
@@ -181,7 +185,7 @@ public class DetailsAnimalFragment extends Fragment {
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        s_animalType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selectedType = (AnimalType) parent.getItemAtPosition(position);
@@ -212,6 +216,16 @@ public class DetailsAnimalFragment extends Fragment {
         et_birthDate.setOnClickListener(showCalendar(et_birthDate, Calendar.getInstance()));
         et_weaningDate.setOnClickListener(showCalendar(et_weaningDate, Calendar.getInstance()));
         et_soldDate.setOnClickListener(showCalendar(et_soldDate, Calendar.getInstance()));
+
+        QueryBuilder<AnimalHasVaccines> queryBuilder = DBConnection.getInstance().queryBuilder(AnimalHasVaccines.class);
+        queryBuilder.where(AnimalHasVaccinesDao.Properties.AnimalId.eq(animal.getAnimalId()));
+        queryBuilder.orderDesc(AnimalHasVaccinesDao.Properties.VaccineDateInMilis);
+        appliedVaccines = queryBuilder.list();
+        for (AnimalHasVaccines a : appliedVaccines){
+            Log.i("Animal", a.getVaccine().getName());
+        }
+        VaccinationHistoryAdapter vaccinationHistoryAdapterdapter = new VaccinationHistoryAdapter(getContext(), R.layout.vaccination_history_list_item, appliedVaccines);
+        lv_vaccinationHistory.setAdapter(vaccinationHistoryAdapterdapter);
 
         return root;
     }
@@ -247,6 +261,7 @@ public class DetailsAnimalFragment extends Fragment {
             et_soldDate.setInputType(InputType.TYPE_DATETIME_VARIATION_DATE);
             et_soldPrice.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
             et_soldWeight.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            ll_vaccinationHistory.setVisibility(LinearLayout.GONE);
         } else {
             et_name.setKeyListener(null);
             et_buyPrice.setKeyListener(null);
@@ -259,6 +274,7 @@ public class DetailsAnimalFragment extends Fragment {
             et_soldPrice.setKeyListener(null);
             et_soldWeight.setKeyListener(null);
             b_edit.setVisibility(Button.GONE);
+            ll_vaccinationHistory.setVisibility(LinearLayout.VISIBLE);
         }
         b_save.setVisibility(Button.GONE);
     }
