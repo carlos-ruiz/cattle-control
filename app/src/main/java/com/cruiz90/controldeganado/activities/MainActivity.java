@@ -120,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
     }
 
+    public MenuItem getMenuItemById(int id){
+        return navigationView.getMenu().findItem(id);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

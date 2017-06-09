@@ -48,4 +48,8 @@
     <string name="applicationDate">Application date</string>
     <string name="vaccine">Vaccine</string>
     <string name="vaccinatedAnimals">Vaccinated animals</string>
+    <string name="periodicity">Periodicity (months)</string>
+    <string name="isRepeat">Is it periodic?</string>
+    <string name="selectAtLeastOneAnimal">Select at least an animal</string>
+    <string name="avatarDescription">Animal type avatar</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.cruiz90.controldeganado.entities;
 
+import android.support.annotation.Nullable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
@@ -16,24 +18,26 @@ public class Vaccine {
     private String name;
     private Float dosePerKg;
     private Boolean isPregnantAllowed;
+    private Integer periodicityInMonths;
 
-    @Generated(hash = 358366363)
-    public Vaccine(Long vaccineId, String name, Float dosePerKg,
-            Boolean isPregnantAllowed) {
+    public Vaccine(String name, Float dosePerKg, Boolean isPregnantAllowed, @Nullable Integer periodicityInMonths) {
+        this.name = name;
+        this.dosePerKg = dosePerKg;
+        this.isPregnantAllowed = isPregnantAllowed;
+        this.periodicityInMonths = periodicityInMonths;
+    }
+
+    @Generated(hash = 37933919)
+    public Vaccine(Long vaccineId, String name, Float dosePerKg, Boolean isPregnantAllowed, Integer periodicityInMonths) {
         this.vaccineId = vaccineId;
         this.name = name;
         this.dosePerKg = dosePerKg;
         this.isPregnantAllowed = isPregnantAllowed;
+        this.periodicityInMonths = periodicityInMonths;
     }
 
     @Generated(hash = 2125395277)
     public Vaccine() {
-    }
-
-    public Vaccine(String name, Float dosePerKg, Boolean isPregnantAllowed) {
-        this.name = name;
-        this.dosePerKg = dosePerKg;
-        this.isPregnantAllowed = isPregnantAllowed;
     }
 
     public Long getVaccineId() {
@@ -60,20 +64,20 @@ public class Vaccine {
         this.dosePerKg = dosePerKg;
     }
 
-    public Boolean getPregnantAllowed() {
-        return isPregnantAllowed;
-    }
-
-    public void setPregnantAllowed(Boolean pregnantAllowed) {
-        isPregnantAllowed = pregnantAllowed;
-    }
-
     public Boolean getIsPregnantAllowed() {
         return this.isPregnantAllowed;
     }
 
     public void setIsPregnantAllowed(Boolean isPregnantAllowed) {
         this.isPregnantAllowed = isPregnantAllowed;
+    }
+
+    public Integer getPeriodicityInMonths() {
+        return periodicityInMonths;
+    }
+
+    public void setPeriodicityInMonths(Integer periodicityInMonths) {
+        this.periodicityInMonths = periodicityInMonths;
     }
 
     @Override

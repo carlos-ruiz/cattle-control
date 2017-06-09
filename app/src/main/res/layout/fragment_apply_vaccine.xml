@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:inputType="date"
         android:focusable="false" />
 
     <TextView
@@ -36,7 +37,7 @@
     <ListView
         android:id="@+id/lv_vaccines"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:choiceMode="multipleChoice" />
 
@@ -45,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        android:textColor="#FFF"
         android:text="@string/save" />
 
 </LinearLayout>

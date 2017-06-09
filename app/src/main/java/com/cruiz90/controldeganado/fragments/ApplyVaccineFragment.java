@@ -23,6 +23,7 @@ import com.cruiz90.controldeganado.entities.Vaccine;
 import com.cruiz90.controldeganado.util.DBConnection;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -65,18 +66,28 @@ public class ApplyVaccineFragment extends Fragment {
                 int size = listView.getCount();
                 SparseBooleanArray itemsChecked = listView.getCheckedItemPositions();
                 Date date = new Date((Long) et_date.getTag());
+
+                List<AnimalHasVaccines> selectedAnimals = new ArrayList<>();
                 for (int i = 0; i < size; i++) {
                     if ((itemsChecked.get(i))) {
-                        AnimalHasVaccines animalHasVaccines = new AnimalHasVaccines(animals.get(i).getAnimalId(), vaccines.get(spinner.getSelectedItemPosition()).getVaccineId(), date);
-                        DBConnection.getInstance().insert(animalHasVaccines);
+                        selectedAnimals.add(new AnimalHasVaccines(animals.get(i).getAnimalId(), vaccines.get(spinner.getSelectedItemPosition()).getVaccineId(), date));
                     }
                 }
 
+                if (selectedAnimals.size() == 0) {
+                    Toast.makeText(getContext(), getString(R.string.selectAtLeastOneAnimal), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (AnimalHasVaccines av : selectedAnimals) {
+                    DBConnection.getInstance().insert(av);
+
+                }
                 getFragmentManager().beginTransaction().replace(R.id.content_frame, new AppliedVaccinesFragment()).commit();
                 Toast.makeText(getContext(), getString(R.string.msgSaved), Toast.LENGTH_SHORT).show();
+
             }
         });
-
 
         return root;
     }

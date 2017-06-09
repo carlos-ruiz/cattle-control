@@ -2,6 +2,7 @@ package com.cruiz90.controldeganado.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ public class AppliedVaccinesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_applied_vaccines, container, false);
         ListView listView = (ListView) v.findViewById(R.id.lv_appliedVaccines);
 
-        QueryBuilder queryBuilder = DBConnection.getInstance().queryBuilder(AnimalHasVaccines.class);
+        QueryBuilder<AnimalHasVaccines> queryBuilder = DBConnection.getInstance().queryBuilder(AnimalHasVaccines.class);
         queryBuilder.where(new WhereCondition.StringCondition("1 GROUP BY VACCINE_DATE "));
         queryBuilder.orderDesc(AnimalHasVaccinesDao.Properties.VaccineDateInMilis);
         appliedVaccines = queryBuilder.list();
@@ -55,6 +56,16 @@ public class AppliedVaccinesFragment extends Fragment {
                 getFragmentManager()
                         .beginTransaction()
                         .replace(R.id.content_frame, DetailsAppliedVaccineFragment.newInstance(ahv.getVaccineId(), ahv.getVaccineDate() != null ? ahv.getVaccineDate().getTime() : 0)).commit();
+            }
+        });
+
+        FloatingActionButton fab_add = (FloatingActionButton) v.findViewById(R.id.fab_add);
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).updateActionBarTitle(getString(R.string.applyVaccine));
+                ((MainActivity) getActivity()).getMenuItemById(R.id.menu_apply_vaccine).setChecked(true);
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new ApplyVaccineFragment()).commit();
             }
         });
 

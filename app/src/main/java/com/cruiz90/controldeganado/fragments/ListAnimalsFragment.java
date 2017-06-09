@@ -2,6 +2,7 @@ package com.cruiz90.controldeganado.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.cruiz90.controldeganado.R;
+import com.cruiz90.controldeganado.activities.MainActivity;
 import com.cruiz90.controldeganado.adapters.AnimalsListAdapter;
 import com.cruiz90.controldeganado.entities.Animal;
 import com.cruiz90.controldeganado.util.DBConnection;
@@ -42,6 +44,16 @@ public class ListAnimalsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Fragment fragment = DetailsAnimalFragment.newInstance(animals.get(position).getAnimalId());
                 getFragmentManager().beginTransaction().replace(R.id.content_frame,fragment).commit();
+            }
+        });
+
+        FloatingActionButton fab_add = (FloatingActionButton) root.findViewById(R.id.fab_add);
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).updateActionBarTitle(getString(R.string.addAnimal));
+                ((MainActivity) getActivity()).getMenuItemById(R.id.menu_add_animal).setChecked(true);
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new AddAnimalFragment()).commit();
             }
         });
         return root;

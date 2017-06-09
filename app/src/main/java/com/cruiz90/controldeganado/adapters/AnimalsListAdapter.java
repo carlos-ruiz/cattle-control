@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cruiz90.controldeganado.R;
 import com.cruiz90.controldeganado.entities.Animal;
+import com.cruiz90.controldeganado.entities.AnimalType;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -53,11 +55,14 @@ public class AnimalsListAdapter extends BaseAdapter {
         TextView color = (TextView) v.findViewById(R.id.color);
         TextView birthDate = (TextView) v.findViewById(R.id.birthDate);
         TextView animalType = (TextView) v.findViewById(R.id.animalType);
+        ImageView image = (ImageView) v.findViewById(R.id.iv_avatar);
 
         name.setText(animal.getName());
         color.setText(animal.getColor());
-        if (animal.getAnimalType() != null)
+        if (animal.getAnimalType() != null) {
             animalType.setText(animal.getAnimalType().getName());
+            image.setImageResource(getImageResource(animal.getAnimalType()));
+        }
 
         if (animal.getBithdate() != null) {
             String format = "dd/MM/yyyy";
@@ -65,5 +70,29 @@ public class AnimalsListAdapter extends BaseAdapter {
             birthDate.setText(sdf.format(animal.getBithdate()));
         }
         return v;
+    }
+
+    private int getImageResource(AnimalType animalType) {
+        int resource;
+        switch (animalType.getName()) {
+            case "Ovino":
+                resource = R.mipmap.ic_sheep_round;
+                break;
+            case "Bovino":
+                resource = R.mipmap.ic_cow;
+                break;
+            case "Equino":
+                resource = R.mipmap.ic_horse;
+                break;
+            case "Caprino":
+                resource = R.mipmap.ic_goat;
+                break;
+            case "Porcino":
+                resource = R.mipmap.ic_pig;
+                break;
+            default:
+                resource = R.mipmap.ic_question;
+        }
+        return resource;
     }
 }
